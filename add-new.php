@@ -75,7 +75,7 @@ if (isset($_POST["submit"])) {
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Message</label>
+                        <label class="form-label">Message:</label>
                         <input type="text" class="form-control border border-gray" name="message">
                     </div>
 

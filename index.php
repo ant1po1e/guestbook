@@ -71,66 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Attempt to execute
                 if ($stmt->execute()) {
                     // Redirect to login
-                    header('location: index.php');
+                    header('location: table.php');
                     exit;
-                } else {
-                    die('Something went wrong');
-                }
-            }
-            unset($stmt);
-        }
-    }
-
-    // Check if login form is submitted
-    if (isset($_POST['login'])) {
-        // Put post vars in regular vars
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
-
-        // Validate email
-        if (empty($email)) {
-            $email_err = 'Please enter email';
-        }
-
-        // Validate password
-        if (empty($password)) {
-            $password_err = 'Please enter password';
-        }
-
-        // Make sure errors are empty
-        if (empty($email_err) && empty($password_err)) {
-            // Prepare query
-            $sql = 'SELECT name, email, password FROM users WHERE email = :email';
-
-            // Prepare statement
-            if ($stmt = $pdo->prepare($sql)) {
-                // Bind params
-                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-
-                // Attempt to execute
-                if ($stmt->execute()) {
-                    // Check if email exists, if yes then verify password
-                    if ($stmt->rowCount() === 1) {
-                        if ($row = $stmt->fetch()) {
-                            $hashed_password = $row['password'];
-                            if (password_verify($password, $hashed_password)) {
-                                // Password is correct, start a new session
-                                session_start();
-
-                                // Store data in session variables
-                                $_SESSION['name'] = $row['name'];
-                                $_SESSION['email'] = $row['email'];
-
-                                // Redirect to welcome page
-                                header('location: welcome.php');
-                                exit;
-                            } else {
-                                $password_err = 'Invalid password';
-                            }
-                        }
-                    } else {
-                        $email_err = 'Email does not exist';
-                    }
                 } else {
                     die('Something went wrong');
                 }
@@ -208,6 +150,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="error-msg justify-content-center d-flex align-items-center">
                     <span class="text-danger"><?php echo $password_err; ?></span>
+                    <span
+                        class="text-danger"><?php echo $email_err; ?></span>
                 </div>
             </form>
         </div>
