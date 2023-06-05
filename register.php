@@ -5,17 +5,18 @@
 if(isset($_POST['submit'])) {
 
   $email = mysqli_real_escape_string($conn, $_POST['email']);
-  $pass = md5($_POST['password']);
+  $password = md5($_POST['password']);
 
-  $select = " SELECT * FROM login WHERE email = '$email' && password = '$pass' ";
+  $select = " SELECT * FROM login WHERE email = '$email' && password = '$password' ";
 
   $result = mysqli_query($conn, $select);
 
 if(mysqli_num_rows($result) > 0){
-    $_SESSION['email'] = $email;
-    header('location:table.php');
-}else{
-    header("Location: index.php?msg=Incorrect Email or Password!");
+    $error[] = 'user already exist!';
+} else{
+    $insert = "INSERT INTO login(email, password) VALUES('$email','$password')";
+    mysqli_query($conn, $insert);
+    header('location:index.php');
 }
 
 };
@@ -48,17 +49,25 @@ if(mysqli_num_rows($result) > 0){
     <section class="pb-5" style="margin-top:30px; padding-top:70px;">
         <div class="container pt-4 pb-5 rounded border border border-3 text-white">
             <div class="text-center mb-4">
-                <h3 style="padding-top:12px;">Login</h3>
+                <h3 style="padding-top:12px;">Register</h3>
             </div>
-
+            <?php
+        if(isset($error)){
+          foreach($error as $error){
+          echo '<p class="error-msg">'.$error.'</p>';
+        }
+      }
+      ?>
             <div class="container d-flex justify-content-center">
-                <form action="" method='post' style="width:270px; min-width:270px; margin-right:30px;">
+                <form action="" method='post'
+                    style="width:270px; min-width:270px; margin-right:30px;">
+
                     <div class="mb-3">
                         <span class="icon">
                             <ion-icon name="mail"></ion-icon>
                         </span>
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control border border-gray" name="email" required>
+                        <input type="text" class="form-control border border-gray" name="email" >
                     </div>
 
                     <div class="mb-3">
@@ -68,19 +77,17 @@ if(mysqli_num_rows($result) > 0){
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control border border-gray" name="password" required>
                     </div>
+
+                    <div class="remember-forgot">
+                    <label><input type="checkbox" required> I agree to the terms & conditions</label>
+                </div><br>
+
                     <div>
-                        <button type="submit" class="button" name="submit">Login</button>
+                        <button type="submit" class="button" name="submit">Register</button>
                     </div>
                     <div class="pt-3 text-center">
-                        <p>Don't have an account? <a href="register.php"
-                                class="register-link text-white fw-bolder">Register</a></p>
-                    </div>
-                    <div class="error-msg justify-content-center d-flex align-items-center">
-                        <span class="text-danger"><?php 
-                        if (isset($_GET["msg"])) {
-                        $msg = $_GET["msg"]; 
-                        echo $msg; }?>
-                        </span>
+                        <p>Already have an account? <a href="index.php"
+                                class="register-link text-white fw-bolder">Login</a></p>
                     </div>
                 </form>
             </div>
