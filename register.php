@@ -7,14 +7,14 @@ if(isset($_POST['submit'])) {
   $email = mysqli_real_escape_string($conn, $_POST['email']);
   $password = md5($_POST['password']);
 
-  $select = " SELECT * FROM login WHERE email = '$email' && password = '$password' ";
+  $select = " SELECT * FROM logreg WHERE email = '$email' && password = '$password' ";
 
   $result = mysqli_query($conn, $select);
 
 if(mysqli_num_rows($result) > 0){
     $error[] = 'user already exist!';
 } else{
-    $insert = "INSERT INTO login(email, password) VALUES('$email','$password')";
+    $insert = "INSERT INTO logreg(email, password) VALUES('$email','$password')";
     mysqli_query($conn, $insert);
     header('location:index.php');
 }
@@ -67,7 +67,7 @@ if(mysqli_num_rows($result) > 0){
                             <ion-icon name="mail"></ion-icon>
                         </span>
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control border border-gray" name="email" >
+                        <input type="email" class="form-control border border-gray" name="email" >
                     </div>
 
                     <div class="mb-3">
@@ -85,7 +85,7 @@ if(mysqli_num_rows($result) > 0){
                     <div>
                         <button type="submit" class="button" name="submit">Register</button>
                     </div>
-                    <div class="pt-3 text-center">
+                    <div class="pt-2 text-center">
                         <p>Already have an account? <a href="index.php"
                                 class="register-link text-white fw-bolder">Login</a></p>
                     </div>

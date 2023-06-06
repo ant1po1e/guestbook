@@ -57,7 +57,7 @@ body {
 .container {
     background: transparent;
     backdrop-filter: blur(30px);
-    height: 420px;
+    height: 400px;
     width: 400px;
 }
 

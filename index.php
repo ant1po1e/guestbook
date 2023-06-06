@@ -7,7 +7,7 @@ if(isset($_POST['submit'])) {
   $email = mysqli_real_escape_string($conn, $_POST['email']);
   $pass = md5($_POST['password']);
 
-  $select = " SELECT * FROM login WHERE email = '$email' && password = '$pass' ";
+  $select = " SELECT * FROM logreg WHERE email = '$email' && password = '$pass' ";
 
   $result = mysqli_query($conn, $select);
 
@@ -58,7 +58,7 @@ if(mysqli_num_rows($result) > 0){
                             <ion-icon name="mail"></ion-icon>
                         </span>
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control border border-gray" name="email" required>
+                        <input type="email" class="form-control border border-gray" name="email" required>
                     </div>
 
                     <div class="mb-3">

@@ -52,12 +52,13 @@ include "db_conn.php";
                 </thead>
                 <tbody class="table-light border border-dark border-3">
                     <?php
+                    $no = 1;
         $sql = "SELECT * FROM `guestbook`";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
                     <tr>
-                        <td><?php echo $row["id"] ?></td>
+                        <td><?php echo $no++; ?></td>
                         <td><?php echo $row["name"] ?></td>
                         <td><?php echo $row["email"] ?></td>
                         <td><?php echo $row["address"] ?></td>

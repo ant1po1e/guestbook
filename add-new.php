@@ -60,23 +60,23 @@ if (isset($_POST["submit"])) {
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Name:</label>
-                            <input type="text" class="form-control border border-gray" name="name">
+                            <input type="text" class="form-control border border-gray" name="name" required>
                         </div>
 
                         <div class="col">
                             <label class="form-label">Email:</label>
-                            <input type="email" class="form-control border border-gray" name="email">
+                            <input type="email" class="form-control border border-gray" name="email" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Address:</label>
-                        <input type="text" class="form-control border border-gray" name="address">
+                        <input type="text" class="form-control border border-gray" name="address" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Message:</label>
-                        <input type="text" class="form-control border border-gray" name="message">
+                        <input type="text" class="form-control border border-gray" name="message" required>
                     </div>
 
                     <div>

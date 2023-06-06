@@ -1,5 +1,5 @@
 <?php
 
-$conn = mysqli_connect('localhost','root','','loginregister');
+$conn = mysqli_connect('localhost','root','','bukutamu');
 
 ?>
